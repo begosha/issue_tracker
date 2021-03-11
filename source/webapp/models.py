@@ -1,33 +1,47 @@
 from django.db import models
+from django.utils import timezone
 
-status_choices = [('new', 'New'), ('in_progress', 'In progress'),  ('done', 'Done')]
-type_choices = [('t', 'Task'), ('b', 'Bug'),  ('e', 'Enhancement')]
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-class Status(models.Model):
-    status = models.CharField(max_length=11, choices=status_choices, verbose_name='Status')
+    class Meta:
+        abstract = True
 
-    def __str__(self):
-        return "{}".format(self.status)
-
-
-class Type(models.Model):
-    task_type = models.CharField(max_length=11, choices=type_choices, verbose_name='Type')
-
-    def __str__(self):
-        return "{}".format(self.task_type)
-
-class Task(models.Model):
+class Task(BaseModel):
 
     summary = models.CharField(max_length=300, null=False, blank=False, verbose_name='Title')
     description = models.TextField(max_length=3000, verbose_name='Description')
-    status = models.ForeignKey('webapp.Status', related_name='status', on_delete=models.PROTECT, verbose_name='Status')
-    task_type = models.ForeignKey('webapp.Type', related_name='type', on_delete=models.PROTECT, verbose_name='Type') 
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated at')
-
+    status = models.ForeignKey('webapp.Status', related_name='statuses', on_delete=models.PROTECT, verbose_name='Status', null=False,blank=False) 
+    task_type = models.ForeignKey('webapp.Type', related_name='types', on_delete=models.PROTECT, verbose_name='Type', null=False,blank=False) 
+    
+    class Meta:
+        db_table = 'tasks'
+        verbose_name = 'Task'
+        verbose_name_plural = 'Tasks'
 
     def __str__(self):
 
         return "{}. {}".format(self.pk, self.summary)
 
 
+class Status(BaseModel):
+    status = models.CharField(max_length=11, null=False, blank=False,verbose_name='Status')
+    
+    class Meta:
+        db_table = 'statuses'
+        verbose_name = 'Status'
+        verbose_name_plural = 'Statuses'
+    def __str__(self):
+        return "{}".format(self.status)
+
+
+class Type(BaseModel):
+    task_type = models.CharField(max_length=11, null=False, blank=False, verbose_name='Type')
+    
+    class Meta:
+        db_table = 'types'
+        verbose_name = 'Type'
+        verbose_name_plural = 'Types'
+    def __str__(self):
+        return "{}".format(self.task_type)
