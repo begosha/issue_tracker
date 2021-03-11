@@ -9,7 +9,7 @@
     <div class="task">
             <h2>{{ task.summary }}</h2>
             <p>
-                <a href="#">See More...</a>
+                <a href="{% url 'task' task.pk %}">See More...</a>
             </p>
             <hr>
     </div>
