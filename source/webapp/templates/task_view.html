@@ -7,7 +7,7 @@
             <p>{{ task.description}}</p>
             <p> Status: {{ task.status }}</p>
             <p> Type: {{ task.task_type }}</p>
-            <a class="btn btn-outline-info" href="#">Update</a>
+            <a class="btn btn-outline-info" href="{% url 'task-update' task.id %}">Update</a>
             <button type="button" class="btn btn-outline-info waves-effect px-3" data-toggle="modal" data-target="#deletion">Delete
             </button>
         </div>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <a class="btn" href='#'>Delete</a>
+                  <a class="btn" href='{% url "task-delete" task.id %}'>Delete</a>
                 </div>
               </div>
             </div>
