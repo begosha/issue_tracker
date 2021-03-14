@@ -53,16 +53,18 @@ class UpdateView(View):
         return render(request, 'task_update_view.html', context={'form': form, 'task': task})  
     
     def post(self, request, *args, **kwargs):
-        task = get_object_or_404(Task, id=kwargs.get('pk'))
+        kwargs ["task"] = get_object_or_404(Task, id=kwargs.get("pk"))
         form = TaskForm(data=request.POST)
         if form.is_valid(): 
-            task.summary=form.cleaned_data.get('summary'),
-            task.description=form.cleaned_data.get('description'),
-            task.status=form.cleaned_data.get('status'),
-            task.task_type=form.cleaned_data.get('task_type')
-            return redirect('task', pk=task.id)   
+            kwargs ["task"].summary = form.cleaned_data.get("summary")
+            kwargs ["task"].description = form.cleaned_data.get("description")
+            kwargs ["task"].status = form.cleaned_data.get("status")
+            kwargs ["task"].task_type = form.cleaned_data.get("task_type")
+            kwargs ["task"].save()
+            return redirect('task', pk=kwargs ["task"].id)   
 
-        return render(request, 'task_update_view.html', context={'form': form, 'task': task}) 
+        return render(request, 'task_update_view.html', context={'form': form, 'task': kwargs ["task"]}) 
+        
 
        
 class DeleteView(TemplateView):
