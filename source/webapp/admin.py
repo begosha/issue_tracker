@@ -15,7 +15,7 @@ class TypeAdmin(admin.ModelAdmin):
     fields = ['task_type']
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['id', 'summary', 'description','status', 'task_type','created_at', 'updated_at']
+    list_display = ['id', 'summary', 'description','status','created_at', 'updated_at']
     list_filter = ['summary']
     search_fields = ['status', 'task_type']
     fields = ['id', 'summary', 'description', 'status', 'task_type', 'created_at', 'updated_at']
