@@ -1,0 +1,146 @@
+[
+{
+  "model": "webapp.task",
+  "pk": 1,
+  "fields": {
+    "created_at": "2021-03-11T11:14:47.304Z",
+    "updated_at": "2021-03-14T13:26:24.036Z",
+    "summary": "Change footer font-size!",
+    "description": "From 9px to 18px",
+    "status": 1,
+    "task_type": 2
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 2,
+  "fields": {
+    "created_at": "2021-03-11T11:16:07.350Z",
+    "updated_at": "2021-03-11T11:16:07.350Z",
+    "summary": "Change hover effect on button",
+    "description": "Button 'go back', color change must be at slower speed",
+    "status": 2,
+    "task_type": 2
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 3,
+  "fields": {
+    "created_at": "2021-03-11T11:17:02.535Z",
+    "updated_at": "2021-03-11T11:17:02.535Z",
+    "summary": "Models fields in admin.py",
+    "description": "Need to change read_only fields (exclude statis)",
+    "status": 3,
+    "task_type": 1
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 4,
+  "fields": {
+    "created_at": "2021-03-11T11:17:37.595Z",
+    "updated_at": "2021-03-11T11:17:37.595Z",
+    "summary": "Change links in navbar",
+    "description": "Links are ugly,  make them pretty",
+    "status": 1,
+    "task_type": 2
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 5,
+  "fields": {
+    "created_at": "2021-03-11T11:18:37.688Z",
+    "updated_at": "2021-03-11T11:18:37.688Z",
+    "summary": "Navbar burger is not working",
+    "description": "Burger is not working in small screen size. Fix it",
+    "status": 2,
+    "task_type": 1
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 6,
+  "fields": {
+    "created_at": "2021-03-11T11:19:23.960Z",
+    "updated_at": "2021-03-11T11:19:23.960Z",
+    "summary": "Change h1 color",
+    "description": "change h1 in index.html to #0000",
+    "status": 2,
+    "task_type": 3
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 1,
+  "fields": {
+    "created_at": "2021-03-11T11:11:45.709Z",
+    "updated_at": "2021-03-11T11:11:45.709Z",
+    "status": "New"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 2,
+  "fields": {
+    "created_at": "2021-03-11T11:11:53.616Z",
+    "updated_at": "2021-03-11T11:11:53.616Z",
+    "status": "Done"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 3,
+  "fields": {
+    "created_at": "2021-03-11T11:12:02.275Z",
+    "updated_at": "2021-03-11T11:12:02.275Z",
+    "status": "In progress"
+  }
+},
+{
+  "model": "webapp.type",
+  "pk": 1,
+  "fields": {
+    "created_at": "2021-03-11T11:12:08.425Z",
+    "updated_at": "2021-03-11T11:12:08.425Z",
+    "task_type": "Bug"
+  }
+},
+{
+  "model": "webapp.type",
+  "pk": 2,
+  "fields": {
+    "created_at": "2021-03-11T11:12:21.574Z",
+    "updated_at": "2021-03-11T11:12:21.575Z",
+    "task_type": "Enhancement"
+  }
+},
+{
+  "model": "webapp.type",
+  "pk": 3,
+  "fields": {
+    "created_at": "2021-03-11T11:12:34.039Z",
+    "updated_at": "2021-03-11T11:12:34.039Z",
+    "task_type": "Task"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$V1OsP83mREdh$l4pMZioDGpklRU3WqXqKLLI9flZzmMEaxo5sBcKTCtM=",
+    "last_login": "2021-03-11T09:08:05.768Z",
+    "is_superuser": true,
+    "username": "gosha",
+    "first_name": "",
+    "last_name": "",
+    "email": "begoshaaaa@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2021-03-11T09:01:53.397Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
