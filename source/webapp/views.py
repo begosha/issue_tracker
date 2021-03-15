@@ -48,7 +48,8 @@ class UpdateView(View):
             'summary': task.summary,
             'description': task.description,
             'status': task.status,
-            'task_type': task.task_type
+            'task_type': task.task_type.all()
+            
         })  
         return render(request, 'task_update_view.html', context={'form': form, 'task': task})  
     
@@ -59,8 +60,9 @@ class UpdateView(View):
             kwargs ["task"].summary = form.cleaned_data.get("summary")
             kwargs ["task"].description = form.cleaned_data.get("description")
             kwargs ["task"].status = form.cleaned_data.get("status")
-            kwargs ["task"].task_type = form.cleaned_data.get("task_type")
+            type_new = form.cleaned_data.pop('task_type')
             kwargs ["task"].save()
+            kwargs ["task"].task_type.set(type_new) 
             return redirect('task', pk=kwargs ["task"].id)   
 
         return render(request, 'task_update_view.html', context={'form': form, 'task': kwargs ["task"]}) 
