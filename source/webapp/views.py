@@ -30,12 +30,13 @@ class TaskAddView(View):
     def post(self, request, *args, **kwargs):
         form = TaskForm(data=request.POST)  
         if form.is_valid():  
+            type_new = form.cleaned_data.pop('task_type')
             task = Task.objects.create(
                 summary=form.cleaned_data.get('summary'),
                 description=form.cleaned_data.get('description'),
-                status=form.cleaned_data.get('status'),
-                task_type=form.cleaned_data.get('task_type')
+                status=form.cleaned_data.get('status')
             )
+            task.task_type.set(type_new)  
             return redirect('task', pk=task.id)  
         return render(request, 'task_add_view.html', context={'form': form}) 
 
