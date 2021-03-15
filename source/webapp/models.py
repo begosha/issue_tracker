@@ -14,7 +14,6 @@ class Task(BaseModel):
     description = models.TextField(max_length=3000, verbose_name='Description')
     status = models.ForeignKey('webapp.Status', related_name='task_statuses', on_delete=models.PROTECT, verbose_name='Status', null=False,blank=False) 
     task_type = models.ForeignKey('webapp.Type', related_name='task_types', on_delete=models.PROTECT, verbose_name='Type', null=False,blank=False) 
-    status_new = models.ManyToManyField('webapp.Status', related_name='statuses', verbose_name='Status', null=False,blank=False) 
     task_type_new = models.ManyToManyField('webapp.Type', related_name='types', verbose_name='Type', null=False,blank=False) 
     
     class Meta:
