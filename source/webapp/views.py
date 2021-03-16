@@ -3,6 +3,7 @@ from webapp.models import Task, Status, Type
 from webapp.forms import TaskForm
 from django.urls import reverse
 from django.views.generic import View, TemplateView, RedirectView
+from .base_view import CustomFormView
 
 
 class IndexView(TemplateView):
@@ -21,24 +22,19 @@ class TaskView(TemplateView):
         kwargs['task'] = get_object_or_404(Task, id=kwargs.get('pk'))
         return super().get_context_data(**kwargs)
 
-class TaskAddView(View):
+class TaskAddView(CustomFormView):
+    template_name = 'task_add_view.html'
+    form_class = TaskForm
+    redirect_url = 'index'
+    def form_valid(self, form):
+        task_type = form.cleaned_data.pop('task_type')
+        task = Task()
+        for key, value in form.cleaned_data.items():
+            setattr(task, key, value)
+        task = form.save()
+        task.task_type.set(task_type)
 
-    def get(self, request, *args, **kwargs):
-        form = TaskForm()
-        return render(request, 'task_add_view.html', context={'form': form})
-       
-    def post(self, request, *args, **kwargs):
-        form = TaskForm(data=request.POST)  
-        if form.is_valid():  
-            type_new = form.cleaned_data.pop('task_type')
-            task = Task.objects.create(
-                summary=form.cleaned_data.get('summary'),
-                description=form.cleaned_data.get('description'),
-                status=form.cleaned_data.get('status')
-            )
-            task.task_type.set(type_new)  
-            return redirect('task', pk=task.id)  
-        return render(request, 'task_add_view.html', context={'form': form}) 
+        return super().form_valid(form)
 
 class UpdateView(View):
     
