@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -10,8 +11,8 @@ class BaseModel(models.Model):
 
 class Task(BaseModel):
 
-    summary = models.CharField(max_length=300, null=False, blank=False, verbose_name='Title')
-    description = models.TextField(max_length=3000, verbose_name='Description')
+    summary = models.CharField(max_length=300, null=False, blank=False, verbose_name='Title', validators=(MinLengthValidator(5), MaxLengthValidator(1000),))
+    description = models.TextField(max_length=3000, verbose_name='Description', validators=(MinLengthValidator(5), MaxLengthValidator(1000),))
     status = models.ForeignKey('webapp.Status', related_name='task_statuses', on_delete=models.PROTECT, verbose_name='Status', null=False,blank=False) 
     task_type = models.ManyToManyField('webapp.Type', related_name='types', verbose_name='Type') 
     
