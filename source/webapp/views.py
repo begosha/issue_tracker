@@ -2,16 +2,21 @@ from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models import Task, Status, Type
 from webapp.forms import TaskForm
 from django.urls import reverse
-from django.views.generic import View, TemplateView, RedirectView, FormView
+from django.views.generic import View, TemplateView, RedirectView, FormView, ListView
 from .base_view import CustomFormView
 
 
-class IndexView(TemplateView):
+class IndexView(ListView):
    template_name = 'index.html'
+   context_object_name = 'tasks'
+   model = Task
+   ordering = ['-created_at']
+   paginate_by = 5
+   paginate_orphans = 1
    
-   def get_context_data(self, **kwargs):
-       kwargs['tasks'] = Task.objects.all()
-       return super().get_context_data(**kwargs)
+#    def get_context_data(self, **kwargs):
+#        kwargs['tasks'] = Task.objects.all()
+#        return super().get_context_data(**kwargs)
 
 
 class TaskView(TemplateView):
