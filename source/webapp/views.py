@@ -11,7 +11,7 @@ class IndexView(ListView):
    context_object_name = 'tasks'
    model = Task
    ordering = ['-created_at']
-   paginate_by = 5
+   paginate_by = 10
    paginate_orphans = 1
    
 #    def get_context_data(self, **kwargs):
