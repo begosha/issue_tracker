@@ -10,3 +10,6 @@ class TaskForm(forms.ModelForm):
         status = forms.ModelChoiceField(queryset=Status.objects.all())
         fields = ('summary','description', 'status', 'task_type')
 
+class SimpleSearchForm(forms.Form):
+
+    search = forms.CharField(max_length=100, required=False, label="Search")
