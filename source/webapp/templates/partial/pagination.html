@@ -2,11 +2,11 @@
 
     <span class="step-links">
 
-        <a href="?page=1">&laquo; В начало</a>
+        <a href="?{% if query %}{{ query }}&{% endif %}page=1">&laquo; В начало</a>
 
         {% if page_obj.has_previous %}
 
-            <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+            <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">Назад</a>
 
         {% else %}
 
@@ -18,6 +18,7 @@
         <form class="current-page" method="get">
 
             <label for="page">
+                {% if search %}<input type="hidden" name="search" value="{{ search }}">{% endif %}
 
                 Страница <input type="text" name="page" id="page" value="{{ page_obj.number }}">
 
@@ -30,7 +31,7 @@
 
         {% if page_obj.has_next %}
 
-            <a href="?page={{ page_obj.next_page_number }}">Далее</a>
+            <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.next_page_number }}">Далее</a>
 
         {% else %}
 
@@ -38,7 +39,7 @@
 
         {% endif %}
 
-        <a href="?page={{ page_obj.paginator.num_pages }}">В конец &raquo;</a>
+        <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.paginator.num_pages }}">В конец &raquo;</a>
 
     </span>
 
