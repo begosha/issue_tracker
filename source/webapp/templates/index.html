@@ -5,6 +5,8 @@
             <h1>Tasks Tracker</h1>
             <p>Here you can see, add, and delete your tasks. I'm your task manager!</p>
         </div>
+    
+    {% include 'partial/simple_search.html' %}
     {% for task in tasks %}
     <div class="task">
             <h2>{{ task.summary }}</h2>
