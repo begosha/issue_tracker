@@ -11,7 +11,7 @@ class BaseModel(models.Model):
 
 class Task(BaseModel):
 
-    summary = models.CharField(max_length=300, null=False, blank=False, verbose_name='Title', validators=(MaxLengthValidator(20),))
+    summary = models.CharField(max_length=300, null=False, blank=False, verbose_name='Title', validators=(MaxLengthValidator(15),))
     description = models.TextField(max_length=3000, verbose_name='Description', validators=(MinLengthValidator(10),))
     status = models.ForeignKey('webapp.Status', related_name='task_statuses', on_delete=models.PROTECT, verbose_name='Status', null=False,blank=False) 
     task_type = models.ManyToManyField('webapp.Type', related_name='types', verbose_name='Type') 
@@ -28,7 +28,7 @@ class Task(BaseModel):
 
 class Status(BaseModel):
     status = models.CharField(max_length=11, null=False, blank=False,verbose_name='Status')
-    
+        
     class Meta:
         db_table = 'statuses'
         verbose_name = 'Status'

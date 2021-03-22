@@ -23,3 +23,15 @@ class MaxLengthValidator(BaseValidator):
     def clean(self, x):
         return len(x)
 
+
+class ContentValidator(BaseValidator):
+    message = 'Value "%(value)s" Does not contain valid message of the task. It should be written with proper symbols!'
+    code = 'invalid_symbols'
+
+    def has_letter(self, a):
+            
+    def clean(self, x):
+        return x
+
+
+
