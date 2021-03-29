@@ -2,6 +2,6 @@
 {% block title %}Update the Task{% endblock %}
 {% block content %}
 <form action='{% url "task-update" task.id %}' method="POST">
-    {% include "task_form.html" with button_text="Edit" %}
+    {% include "task/task_form.html" with button_text="Edit" %}
 </form>
 {% endblock %}
