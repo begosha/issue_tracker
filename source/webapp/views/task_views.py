@@ -123,6 +123,5 @@ class DeleteView(TemplateView):
    def get_context_data(self, **kwargs):
        task = get_object_or_404(Task, id=kwargs.get('pk'))
        task.delete()
-       kwargs['tasks'] = Task.objects.all()
-       return super().get_context_data(**kwargs)
+       return redirect()
 
