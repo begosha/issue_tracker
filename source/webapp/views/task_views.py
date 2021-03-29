@@ -1,15 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from models import Task, Status, Type
-from webapp.forms import TaskForm, SimpleSearchForm
+from ..models import Task, Status, Type
+from ..forms import TaskForm, SimpleSearchForm
 from django.urls import reverse
-from django.views.generic import View, TemplateView, RedirectView, FormView, ListView
-from source.webapp.base_view import CustomFormView
+from django.views.generic import View, TemplateView, RedirectView, FormView, ListView, DetailView
+from ..base_view import CustomFormView
 from django.db.models import Q
 from django.utils.http import urlencode
 
 
 class IndexView(ListView):
-   template_name = 'index.html'
+   template_name = 'task/index.html'
    context_object_name = 'tasks'
    model = Task
    ordering = ['-created_at']
@@ -42,21 +42,21 @@ class IndexView(ListView):
        if self.form.is_valid():
            return self.form.cleaned_data['search']
        return None
-  
+
+class TaskView(DetailView):
+    model = Task
+    template_name = 'task/task_view.html'
 
 
-class TaskView(TemplateView):
-
-    template_name = 'task_view.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['task'] = get_object_or_404(Task, id=kwargs.get('pk'))
-        return super().get_context_data(**kwargs)
+    # def get_context_data(self, **kwargs):
+    #     kwargs['task'] = get_object_or_404(Task, id=kwargs.get('pk'))
+    #     return super().get_context_data(**kwargs)
 
 class TaskAddView(CustomFormView):
-    template_name = 'task_add_view.html'
+    template_name = 'task/task_add_view.html'
     form_class = TaskForm
-    redirect_url = 'index'
+    redirect_url = '/tasks/'
+
     def form_valid(self, form):
         task_type = form.cleaned_data.pop('task_type')
         task = Task()
@@ -71,7 +71,7 @@ class TaskAddView(CustomFormView):
         
 class UpdateView(FormView):
     form_class = TaskForm
-    template_name = 'task_update_view.html'
+    template_name = 'task/task_update_view.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.task = self.get_object()
@@ -107,7 +107,7 @@ class UpdateView(FormView):
 
        
 class DeleteView(TemplateView):
-   template_name = 'index.html'
+   template_name = 'task/index.html'
    
    def get_context_data(self, **kwargs):
        task = get_object_or_404(Task, id=kwargs.get('pk'))
