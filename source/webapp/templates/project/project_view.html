@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}{{ project.project_name }}{% endblock %}
+{% block content %}
+        <div class="task-view">
+            <h1>Project:</h1>
+            <h2>{{ project.project_name }}</h2>
+            <p>Description: {{ project.project_description}}</p>
+            <p> Start Date: {{ project.start_date }}</p>
+            <p> End Date: {{ project.end_date }}</p>
+            <div class="project-tasks">
+                <h2>Tasks:</h2>
+                {% for task in project.tasks.all %}
+                <div class="task">
+                    <h3>{{ task.summary }}</h3>
+                    <p>
+                        <a href="{% url 'task' task.pk %}">See More...</a>
+                    </p>
+                    <hr>
+                    </div>
+                {% empty %}
+                    <p>No tasks yet.</p>
+                {% endfor %}
+            </div>
+            <a class="btn btn-outline-info" href="#">Update</a>
+            <a class="btn btn-outline-info" href="{% url "task_add" project.pk %}">Add Task</a>
+            <button type="button" class="btn btn-outline-info waves-effect px-3" data-toggle="modal" data-target="#deletion">Delete
+            </button>
+        </div>
+        <div class="modal fade" id="deletion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this task?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <a class="btn" href='{% url "project-delete" project.id %}'>Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+{% endblock %}

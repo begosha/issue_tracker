@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Add a New Project{% endblock %}
+{% block content %}
+	<div class="header-info-block">
+            <h1>Add A new project</h1>
+	</div>
 
-</body>
-</html>
+	<div class="task-form">
+		<form action="" method="POST">
+			{% include "project/project_form.html" with button_text="ADD" %}
+		</form>
+	</div>
+{% endblock %}

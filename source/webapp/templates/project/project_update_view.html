@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Update the Project{% endblock %}
+{% block content %}
+<form action='{% url "project-update" project.id %}' method="POST">
+    {% include "project/project_form.html" with button_text="Edit" %}
+</form>
+{% endblock %}
