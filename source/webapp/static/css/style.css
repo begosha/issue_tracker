@@ -69,6 +69,12 @@ body{
 		text-transform: uppercase;
 		font-weight: bold;
 	}
+	.task-view h3{
+		color: #0b2e13;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 14px;
+	}
 	.task-view p {
 		text-transform: capitalize;
 		color: #424242;
