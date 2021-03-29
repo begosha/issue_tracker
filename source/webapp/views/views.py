@@ -3,7 +3,7 @@ from webapp.models import Task, Status, Type
 from webapp.forms import TaskForm, SimpleSearchForm
 from django.urls import reverse
 from django.views.generic import View, TemplateView, RedirectView, FormView, ListView
-from .base_view import CustomFormView
+from source.webapp.base_view import CustomFormView
 from django.db.models import Q
 from django.utils.http import urlencode
 
