@@ -1,10 +1,21 @@
 [
 {
+  "model": "webapp.project",
+  "pk": 1,
+  "fields": {
+    "start_date": "2021-03-29",
+    "end_date": null,
+    "project_name": "Bootstrap",
+    "project_description": "Style the pages using bootstrap and more"
+  }
+},
+{
   "model": "webapp.task",
   "pk": 1,
   "fields": {
     "created_at": "2021-03-11T11:14:47.304Z",
     "updated_at": "2021-03-15T11:06:00.975Z",
+    "project": 1,
     "summary": "Change footer font-size",
     "description": "From 9px to 18px",
     "status": 1,
@@ -19,6 +30,7 @@
   "fields": {
     "created_at": "2021-03-11T11:16:07.350Z",
     "updated_at": "2021-03-11T11:16:07.350Z",
+    "project": 1,
     "summary": "Change hover effect on button",
     "description": "Button 'go back', color change must be at slower speed",
     "status": 2,
@@ -33,6 +45,7 @@
   "fields": {
     "created_at": "2021-03-11T11:17:02.535Z",
     "updated_at": "2021-03-11T11:17:02.535Z",
+    "project": 1,
     "summary": "Models fields in admin.py",
     "description": "Need to change read_only fields (exclude statis)",
     "status": 3,
@@ -47,6 +60,7 @@
   "fields": {
     "created_at": "2021-03-11T11:17:37.595Z",
     "updated_at": "2021-03-11T11:17:37.595Z",
+    "project": 1,
     "summary": "Change links in navbar",
     "description": "Links are ugly,  make them pretty",
     "status": 1,
@@ -61,6 +75,7 @@
   "fields": {
     "created_at": "2021-03-11T11:18:37.688Z",
     "updated_at": "2021-03-11T11:18:37.688Z",
+    "project": 1,
     "summary": "Navbar burger is not working",
     "description": "Burger is not working in small screen size. Fix it",
     "status": 2,
@@ -75,6 +90,7 @@
   "fields": {
     "created_at": "2021-03-11T11:19:23.960Z",
     "updated_at": "2021-03-11T11:19:23.960Z",
+    "project": 1,
     "summary": "Change h1 color",
     "description": "change h1 in index.html to #0000",
     "status": 2,
@@ -89,6 +105,7 @@
   "fields": {
     "created_at": "2021-03-15T11:18:58.567Z",
     "updated_at": "2021-03-15T11:21:51.990Z",
+    "project": 1,
     "summary": "Update db for IsuueTracker project",
     "description": "You can see the bullets are due to django CSS for lists. So to remove them, think about creating a new wudget inheriting from CheckboxSelectMultiple with adding a class to the \"ul\" html tag, and then add your own css",
     "status": 1,
@@ -103,6 +120,7 @@
   "fields": {
     "created_at": "2021-03-15T11:22:44.059Z",
     "updated_at": "2021-03-15T11:24:09.789Z",
+    "project": 1,
     "summary": "Styling django widget in wizard form",
     "description": "I am facing an issue with widgets in forms. I have 3 steps ( 3 forms ) in a django wizard and I want to style each field.\r\n\r\nIf I loop the forms to style each field separately it seems to work but, it doesn't work with the fields I have as widgets in my model ( they appear styled but the input is not recognized ).",
     "status": 3,
@@ -117,6 +135,7 @@
   "fields": {
     "created_at": "2021-03-15T11:25:25.323Z",
     "updated_at": "2021-03-15T11:25:25.323Z",
+    "project": 1,
     "summary": "Bullets next to django multiple MultipleChoiceField",
     "description": "When forms.CheckboxSelectMultiple is rendered it is rendered in a ul tag . What you need to do is add the following to your css (making it more specific to that form as required):\r\n\r\nul\r\n{\r\n    list-style-type: none;\r\n}",
     "status": 3,
@@ -131,12 +150,61 @@
   "fields": {
     "created_at": "2021-03-16T09:31:19.974Z",
     "updated_at": "2021-03-16T09:39:36.710Z",
+    "project": 1,
     "summary": "Navbar burger is not working",
     "description": "WOOOOOOOOOOOOOOOOOAAAAAAAAAAAAAHH it works bitch",
     "status": 1,
     "task_type": [
       1,
       2
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 12,
+  "fields": {
+    "created_at": "2021-03-21T16:45:51.833Z",
+    "updated_at": "2021-03-21T16:45:51.833Z",
+    "project": 1,
+    "summary": "Change footer",
+    "description": "Change footer",
+    "status": 1,
+    "task_type": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 14,
+  "fields": {
+    "created_at": "2021-03-29T08:34:57.431Z",
+    "updated_at": "2021-03-29T08:34:57.431Z",
+    "project": 1,
+    "summary": "Change footer",
+    "description": "ihbuihbojn",
+    "status": 2,
+    "task_type": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 15,
+  "fields": {
+    "created_at": "2021-03-29T08:41:16.065Z",
+    "updated_at": "2021-03-29T08:41:16.065Z",
+    "project": 1,
+    "summary": "Change footer",
+    "description": "ihbuihbojn",
+    "status": 2,
+    "task_type": [
+      2,
+      3
     ]
   }
 },
