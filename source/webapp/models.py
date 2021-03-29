@@ -9,9 +9,30 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-class Task(BaseModel):
+class Project(models.Model):
+    start_date = models.DateField(auto_now_add=False, null=False, blank=False, verbose_name='Start Date')
+    end_date = models.DateField(null=True, verbose_name='End Date')
+    project_name = models.CharField(max_length=15, null=False, blank=False, verbose_name='Title', validators=(MaxLengthValidator(15),))
+    project_description = models.TextField(max_length=3000, verbose_name='Description', validators=(MinLengthValidator(10),))
 
-    summary = models.CharField(max_length=300, null=False, blank=False, verbose_name='Title', validators=(MaxLengthValidator(15),))
+    class Meta:
+        db_table = 'projects'
+        verbose_name = 'Project'
+        verbose_name_plural = 'Projects'
+
+    def __str__(self):
+        return self.project_name
+
+class Task(BaseModel):
+    project = models.ForeignKey(
+        'webapp.Project',
+        on_delete=models.CASCADE,
+        related_name='tasks',
+        verbose_name='Task',
+        null=False,
+        blank=False
+    )
+    summary = models.CharField(max_length=15, null=False, blank=False, verbose_name='Title', validators=(MaxLengthValidator(15),))
     description = models.TextField(max_length=3000, verbose_name='Description', validators=(MinLengthValidator(10),))
     status = models.ForeignKey('webapp.Status', related_name='task_statuses', on_delete=models.PROTECT, verbose_name='Status', null=False,blank=False) 
     task_type = models.ManyToManyField('webapp.Type', related_name='types', verbose_name='Type') 
@@ -46,4 +67,5 @@ class Type(BaseModel):
         verbose_name_plural = 'Types'
     def __str__(self):
         return "{}".format(self.task_type)
+
 

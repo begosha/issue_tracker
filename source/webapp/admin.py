@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.apps import apps
-from webapp.models import Status, Task, Type
+from .models import Status, Task, Type, Project
 
 class StatusAdmin(admin.ModelAdmin):
     list_display = ['status']
@@ -21,7 +21,15 @@ class TaskAdmin(admin.ModelAdmin):
     fields = ['id', 'summary', 'description', 'status', 'task_type', 'created_at', 'updated_at']
     readonly_fields = ['created_at', 'updated_at', 'id']
 
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ['id', 'project_name', 'project_description', 'start_date', 'end_date']
+    list_filter = ['project_name']
+    search_fields = ['project_name']
+    fields = ['id', 'project_name', 'project_description', 'start_date', 'end_date']
+    readonly_fields = ['id']
+
 
 admin.site.register(Status, StatusAdmin)
 admin.site.register(Type, TypeAdmin)
 admin.site.register(Task, TaskAdmin)
+admin.site.register(Project, ProjectAdmin)
