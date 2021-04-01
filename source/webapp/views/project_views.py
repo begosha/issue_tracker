@@ -6,6 +6,7 @@ from django.views.generic import View, TemplateView, RedirectView, FormView, Lis
 from ..base_view import CustomFormView
 from django.db.models import Q
 from django.utils.http import urlencode
+from django.http import HttpResponseRedirect
 
 
 class IndexView(ListView):
@@ -91,49 +92,12 @@ class ProjectUpdateView(UpdateView):
 
 class ProjectDeleteView(DeleteView):
     model = Project
-    template_name = 'project/delete.html'
+    template_name = 'project/index.html'
     context_object_name = 'project'
     success_url = reverse_lazy('index')
-# class ProjectUpdate(FormView):
-#     form_class = ProjectForm
-#     template_name = 'project/project_update_view.html'
-#
-#     def dispatch(self, request, *args, **kwargs):
-#         self.project = self.get_object()
-#         return super().dispatch(request, *args, **kwargs)
-#
-#     def get_initial(self):
-#         return super().get_initial()
-#
-#     def get_form_kwargs(self):
-#         kwargs = super().get_form_kwargs()
-#         kwargs['instance'] = self.project
-#         return kwargs
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['project'] = self.project
-#         return context
-#
-#     def get_object(self):
-#         project = get_object_or_404(
-#             Project, id=self.kwargs.get('pk')
-#             )
-#         return project
-#
-#     def form_valid(self, form):
-#         form.save()
-#         return super().form_valid(form)
-#
-#     def get_success_url(self):
-#         return reverse('project', kwargs={'pk': self.kwargs.get('pk')})
-#
-# class DeleteProject(TemplateView):
-#     template_name = 'project/index.html'
-#
-#     def get_context_data(self, **kwargs):
-#         project = get_object_or_404(Project, id=kwargs.get('pk'))
-#         project.delete()
-#         kwargs['projects'] = Project.objects.all()
-#         return super().get_context_data(**kwargs)
-#
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.is_deleted = True
+        return HttpResponseRedirect(success_url)
