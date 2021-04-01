@@ -14,7 +14,7 @@ class Project(models.Model):
     end_date = models.DateField(null=True, verbose_name='End Date')
     project_name = models.CharField(max_length=15, null=False, blank=False, verbose_name='Title', validators=(MaxLengthValidator(15),))
     project_description = models.TextField(max_length=3000, verbose_name='Description', validators=(MinLengthValidator(10),))
-
+    is_deleted = False
     class Meta:
         db_table = 'projects'
         verbose_name = 'Project'
