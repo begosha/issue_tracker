@@ -7,6 +7,7 @@ from ..base_view import CustomFormView
 from django.db.models import Q
 from django.utils.http import urlencode
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(ListView):
@@ -47,10 +48,11 @@ class ProjectView(DetailView):
     model = Project
     template_name = 'project/project_view.html'
 
-class ProjectCreate(CreateView):
+class ProjectCreate(LoginRequiredMixin, CreateView):
     template_name = 'project/project_add_view.html'
     form_class = ProjectForm
     model = Project
+
 
     def form_valid(self, form):
         project = Project()
@@ -61,10 +63,11 @@ class ProjectCreate(CreateView):
     def get_success_url(self):
         return reverse('index')
 
-class TaskCreate(CreateView):
+class TaskCreate(LoginRequiredMixin, CreateView):
     template_name = 'task/task_add_view.html'
     form_class = TaskForm
     model = Task
+
 
     def get_success_url(self):
         return reverse(
@@ -77,7 +80,7 @@ class TaskCreate(CreateView):
         form.instance.project = project
         return super().form_valid(form)
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProjectForm
     model = Project
     template_name = 'project/project_update_view.html'
@@ -87,10 +90,11 @@ class ProjectUpdateView(UpdateView):
         return reverse('project', kwargs={'pk': self.kwargs.get('pk')})
 
 
-class ProjectDeleteView(DeleteView):
+class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     model = Project
     context_object_name = 'product'
     success_url = reverse_lazy('index')
+
 
     def get(self, request, *args, **kwargs):
         return super().delete(request, *args, **kwargs)

@@ -6,6 +6,7 @@ from django.views.generic import View, TemplateView, RedirectView, FormView, Lis
 from ..base_view import CustomFormView
 from django.db.models import Q
 from django.utils.http import urlencode
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(ListView):
@@ -47,7 +48,7 @@ class TaskView(DetailView):
     model = Task
     template_name = 'task/task_view.html'
 
-class TaskCreate(CreateView):
+class TaskCreate(LoginRequiredMixin ,CreateView):
     template_name = 'task/task_add_view.html'
     form_class = TaskForm
     model = Task
@@ -65,22 +66,23 @@ class TaskCreate(CreateView):
 
 
 
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     template_name = 'task/task_update_view.html'
     form_class = TaskForm
     context_object_name = 'task'
 
+
+
     def get_success_url(self):
         return reverse('project', kwargs={'pk': self.object.project.pk})
 
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
-
 
     def get_success_url(self):
         return reverse('project', kwargs={'pk': self.object.project.pk})
