@@ -90,14 +90,18 @@ class ProjectUpdateView(UpdateView):
         return reverse('project', kwargs={'pk': self.kwargs.get('pk')})
 
 
+# class ProjectDeleteView(DeleteView):
+#     model = Project
+#     template_name = 'product/index.html'
+#     context_object_name = 'product'
+#     success_url = reverse_lazy('index')
+
 class ProjectDeleteView(DeleteView):
     model = Project
-    template_name = 'project/index.html'
-    context_object_name = 'project'
+    context_object_name = 'product'
     success_url = reverse_lazy('index')
 
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        self.object.is_deleted = True
-        return HttpResponseRedirect(success_url)
+    def get(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)
+
+

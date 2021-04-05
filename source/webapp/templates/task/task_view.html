@@ -7,7 +7,7 @@
             <p>{{ task.description}}</p>
             <p> Status: {{ task.status }}</p>
             <p> Type: {% for typee in task.task_type.all %}{{ typee.task_type }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-            <a class="btn btn-outline-info" href="{% url 'task-update' task.id %}">Update</a>
+                <a class="btn btn-outline-info" href="{% url 'task-update' task.id %}">Update</a>
             <button type="button" class="btn btn-outline-info waves-effect px-3" data-toggle="modal" data-target="#deletion">Delete
             </button>
         </div>
