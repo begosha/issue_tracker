@@ -85,5 +85,5 @@ class TaskDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('project', kwargs={'pk': self.object.project.pk})
 
-    
+
 

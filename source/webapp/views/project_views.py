@@ -56,9 +56,6 @@ class ProjectCreate(CreateView):
         project = Project()
         for key, value in form.cleaned_data.items():
             setattr(project, key, value)
-
-        project.save()
-
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -89,12 +86,6 @@ class ProjectUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('project', kwargs={'pk': self.kwargs.get('pk')})
 
-
-# class ProjectDeleteView(DeleteView):
-#     model = Project
-#     template_name = 'product/index.html'
-#     context_object_name = 'product'
-#     success_url = reverse_lazy('index')
 
 class ProjectDeleteView(DeleteView):
     model = Project
