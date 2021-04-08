@@ -16,7 +16,7 @@
 <div class="container">
     <div class="task-form">
     <h1>LOGIN PAGE</h1>
-    <form action="{% url 'login' %}" method="post" class="text-center">
+    <form action="" method="post" class="text-center">
         {% csrf_token %}
         {% if has_error %}
             <p class="form-error">Incorrect login or password.</p>
