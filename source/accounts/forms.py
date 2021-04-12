@@ -4,8 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 
-class MyUserCreationForm(UserCreationForm):
-
+class MyUserCreationForm(UserCreationForm): 
     email  = forms.EmailField(required=True, widget=forms.EmailInput)
 
     def clean(self):
