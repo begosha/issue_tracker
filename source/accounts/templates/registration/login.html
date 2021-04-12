@@ -1,19 +1,6 @@
-{% load static %}
-
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <title>Sign In</title>
-</head>
-<body>
-<div class="container">
+{% extends 'base.html' %}
+{% block title %}Update the Project{% endblock %}
+{% block content %}
     <div class="task-form">
     <h1>LOGIN PAGE</h1>
     <form action="" method="post" class="text-center">
@@ -34,11 +21,4 @@
         <button type="submit">Sign In</button>
     </form>
 </div>
-    <a class="btn btn-outline-info" href="{% url 'index' %}" role="button">Go Back</a>
-</div>
- <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/btn.js' %}"></script>
-</body>
-</html>
+{% endblock %}
