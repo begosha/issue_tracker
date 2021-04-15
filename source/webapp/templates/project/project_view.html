@@ -7,7 +7,7 @@
             <p>Description: {{ project.project_description}}</p>
             <p> Start Date: {{ project.start_date }}</p>
             <p> End Date: {{ project.end_date }}</p>
-            <p>Users: {% for userr in project.users.all %}{{ userr.users }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p>Users: {{ project.users.all }} {% for user in project.users.all %}{{ user.username }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
             <div class="project-tasks">
                 <h2>Tasks:</h2>
                 {% for task in project.tasks.all %}
@@ -24,7 +24,7 @@
             </div>
             <a class="btn btn-outline-info" href="{% url 'project-update' project.id %}">Update</a>
             <a class="btn btn-outline-info" href="#">Add User</a>
-            <a class="btn btn-outline-info" href="{% url "task_add" project.pk %}">Add Task</a>
+            <a class="btn btn-outline-info" href="{% url 'task_add' project.pk %}">Add Task</a>
             <button type="button" class="btn btn-outline-info waves-effect px-3" data-toggle="modal" data-target="#deletion">Delete
             </button>
         </div>
