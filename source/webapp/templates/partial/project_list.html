@@ -1,0 +1,14 @@
+{% for project in projects %}
+<div class="task">
+        <h2>{{ project.project_name }}</h2>
+        <p>
+            <a href="{% url 'project' project.pk %}">See More...</a>
+        </p>
+        <hr>
+</div>
+{% endfor %}
+{% if is_paginated %}
+
+{% include 'partial/pagination.html' %}
+
+{% endif %}

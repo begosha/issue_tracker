@@ -26,7 +26,7 @@
                         {% endif %}
                         
                         {% if user.is_authenticated %}
-                            <li class="nav-item" style="padding-top: 7px">Hello, {{ user.username }}!</li>
+                            <li class="nav-item" style="padding-top: 7px">Hello, <a href="{% url 'detail' user.pk %}">{{ user.username }}</a>!</li>
                             <li class="nav-item">
                                     <a class="nav-link" href="{% url 'logout' %}?next={{ request.get_full_path }}">Sign out</a>
                                 </li>
