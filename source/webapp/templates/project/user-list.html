@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Add a New Project{% endblock %}
+{% block content %}
+	<div class="header-info-block">
+            <h1>Add users to a project</h1>
+	</div>
+		<form action="" method="POST">
+			{% include "project/project_form.html" with button_text="SUBMIT" %}
+		</form>
+	
+{% endblock %}

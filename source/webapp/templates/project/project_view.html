@@ -23,7 +23,8 @@
                 {% endfor %}
             </div>
             <a class="btn btn-outline-info" href="{% url 'project-update' project.id %}">Update</a>
-            <a class="btn btn-outline-info" href="#">Add User</a>
+            <a class="btn btn-outline-info" href="{% url 'users-add' project.pk %}">Add User</a>
+            <a class="btn btn-outline-info" href="{% url 'users-delete' project.pk %}">Delete User</a>
             <a class="btn btn-outline-info" href="{% url 'task_add' project.pk %}">Add Task</a>
             <button type="button" class="btn btn-outline-info waves-effect px-3" data-toggle="modal" data-target="#deletion">Delete
             </button>
