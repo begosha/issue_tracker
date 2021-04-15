@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.utils.http import urlencode
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.exceptions import PermissionDenied
 
 
 class IndexView(ListView):
@@ -48,17 +49,20 @@ class ProjectView(DetailView):
     model = Project
     template_name = 'project/project_view.html'
 
-class UsersAddView(PermissionRequiredMixin, UpdateView):
+class UsersAddView(LoginRequiredMixin, UpdateView):
     form_class = UsersForm
     model = Project
     template_name = 'project/user-list.html'
     context_object_name = 'project'
-    permission_required = 'webapp.change_project'
 
     def form_valid(self, form):
-        project = get_object_or_404(Project, id=self.kwargs.get('pk'))
-        users = form.save()
-        return super().form_valid(form)
+        user = self.request.user
+        if user.groups.filter(name__in=['Project Manager', 'Team Lead']).exists():
+            project = get_object_or_404(Project, id=self.kwargs.get('pk'))
+            users = form.save()
+            return super().form_valid(form)
+        else:
+            raise PermissionDenied
 
     def get_success_url(self):
         return reverse('index')
