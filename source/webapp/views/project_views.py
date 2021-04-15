@@ -56,18 +56,23 @@ class ProjectCreate(PermissionRequiredMixin, CreateView):
 
 
     def form_valid(self, form):
-        project = Project()
-        for key, value in form.cleaned_data.items():
-            setattr(project, key, value)
+        project = form.save(commit=False)
+        project.author = self.request.user
+        project.save()
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('index')
 
-class TaskCreate(LoginRequiredMixin, CreateView):
+class TaskCreate(PermissionRequiredMixin, CreateView):
     template_name = 'task/task_add_view.html'
     form_class = TaskForm
     model = Task
+    permission_required = 'webapp.add_task'
+
+    def has_permission(self):
+        project = get_object_or_404(Project, id=self.kwargs.get('pk'))
+        return project.author == self.request.user and super().has_permission()
 
 
     def get_success_url(self):
@@ -78,7 +83,9 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         project = get_object_or_404(Project, id=self.kwargs.get('pk'))
-        form.instance.project = project
+        task = form.instance
+        task.project = project
+        task.author = self.request.user
         return super().form_valid(form)
 
 class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
