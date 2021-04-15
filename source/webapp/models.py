@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.contrib.auth import get_user_model
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -14,6 +15,14 @@ class Project(models.Model):
     end_date = models.DateField(null=True, verbose_name='End Date')
     project_name = models.CharField(max_length=15, null=False, blank=False, verbose_name='Title', validators=(MaxLengthValidator(15),))
     project_description = models.TextField(max_length=3000, verbose_name='Description', validators=(MinLengthValidator(10),))
+    users = models.ManyToManyField(get_user_model(), related_name='projects')
+    author = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='project'
+    )
+    
     class Meta:
         db_table = 'projects'
         verbose_name = 'Project'
@@ -36,6 +45,12 @@ class Task(BaseModel):
     description = models.TextField(max_length=3000, verbose_name='Description', validators=(MinLengthValidator(10),))
     status = models.ForeignKey('webapp.Status', related_name='task_statuses', on_delete=models.PROTECT, verbose_name='Status', null=False,blank=False) 
     task_type = models.ManyToManyField('webapp.Type', related_name='types', verbose_name='Type') 
+    author = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='tasks'
+    )
     
     class Meta:
         db_table = 'tasks'
