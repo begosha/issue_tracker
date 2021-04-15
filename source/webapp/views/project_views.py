@@ -59,6 +59,7 @@ class ProjectCreate(PermissionRequiredMixin, CreateView):
         project = form.save(commit=False)
         project.author = self.request.user
         project.save()
+        project.users.set([project.author])
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -105,6 +106,10 @@ class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
     context_object_name = 'product'
     success_url = reverse_lazy('index')
     permission_required ='webapp.delete_project'
+
+    def has_permission(self):
+        project = get_object_or_404(Project, id=self.kwargs.get('pk'))
+        return project.author == self.request.user and super().has_permission()
 
 
     def get(self, request, *args, **kwargs):
