@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from ..models import Task, Status, Type, Project
-from ..forms import TaskForm, SimpleSearchForm, ProjectForm
+from ..forms import TaskForm, SimpleSearchForm, ProjectForm, UsersForm
 from django.urls import reverse, reverse_lazy
 from django.views.generic import View, TemplateView, RedirectView, FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from ..base_view import CustomFormView
@@ -47,6 +47,38 @@ class IndexView(ListView):
 class ProjectView(DetailView):
     model = Project
     template_name = 'project/project_view.html'
+
+class UsersAddView(PermissionRequiredMixin, UpdateView):
+    form_class = UsersForm
+    model = Project
+    template_name = 'project/user-list.html'
+    context_object_name = 'project'
+    permission_required = 'webapp.change_project'
+
+    def form_valid(self, form):
+        project = get_object_or_404(Project, id=self.kwargs.get('pk'))
+        users = form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('index')
+
+class UsersDeleteView(PermissionRequiredMixin, UpdateView):
+    form_class = UsersForm
+    model = Project
+    template_name = 'project/user-list.html'
+    context_object_name = 'project'
+    permission_required = 'webapp.change_project'
+
+    def form_valid(self, form):
+        project = get_object_or_404(Project, id=self.kwargs.get('pk'))
+        users = form.save()
+        print(users)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('index')
+
 
 class ProjectCreate(PermissionRequiredMixin, CreateView):
     template_name = 'project/project_add_view.html'
