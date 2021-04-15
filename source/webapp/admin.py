@@ -1,6 +1,11 @@
 from django.contrib import admin
 from django.apps import apps
 from .models import Status, Task, Type, Project
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
+from accounts.models import Profile
+
+
 
 class StatusAdmin(admin.ModelAdmin):
     list_display = ['status']
@@ -28,8 +33,19 @@ class ProjectAdmin(admin.ModelAdmin):
     fields = ['id', 'project_name', 'project_description', 'start_date', 'end_date']
     readonly_fields = ['id']
 
+class ProfileInline(admin.StackedInline):
+   model = Profile
+   fields = ['github', 'summary', 'avatar']
+
+
+class ProfileAdmin(UserAdmin):
+   inlines = [ProfileInline]
 
 admin.site.register(Status, StatusAdmin)
 admin.site.register(Type, TypeAdmin)
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Project, ProjectAdmin)
+
+User = get_user_model()
+admin.site.unregister(User)
+admin.site.register(User, ProfileAdmin)
