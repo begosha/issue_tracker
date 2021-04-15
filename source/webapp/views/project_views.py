@@ -7,7 +7,7 @@ from ..base_view import CustomFormView
 from django.db.models import Q
 from django.utils.http import urlencode
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 class IndexView(ListView):
@@ -48,10 +48,11 @@ class ProjectView(DetailView):
     model = Project
     template_name = 'project/project_view.html'
 
-class ProjectCreate(LoginRequiredMixin, CreateView):
+class ProjectCreate(PermissionRequiredMixin, CreateView):
     template_name = 'project/project_add_view.html'
     form_class = ProjectForm
     model = Project
+    permission_required = 'webapp.add_project'
 
 
     def form_valid(self, form):
@@ -80,20 +81,23 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form.instance.project = project
         return super().form_valid(form)
 
-class ProjectUpdateView(LoginRequiredMixin, UpdateView):
+class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = ProjectForm
     model = Project
     template_name = 'project/project_update_view.html'
     context_object_name = 'project'
+    permission_required = 'webapp.change_project'
+
 
     def get_success_url(self):
         return reverse('project', kwargs={'pk': self.kwargs.get('pk')})
 
 
-class ProjectDeleteView(LoginRequiredMixin, DeleteView):
+class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
     model = Project
     context_object_name = 'product'
     success_url = reverse_lazy('index')
+    permission_required ='webapp.delete_project'
 
 
     def get(self, request, *args, **kwargs):
