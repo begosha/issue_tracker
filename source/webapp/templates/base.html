@@ -19,9 +19,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
+                        {% if perms.webapp.add_project %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'project-add' %}">Add Project</a>
                         </li>
+                        {% endif %}
                         
                         {% if user.is_authenticated %}
                             <li class="nav-item" style="padding-top: 7px">Hello, {{ user.username }}!</li>
