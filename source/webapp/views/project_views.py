@@ -112,7 +112,7 @@ class TaskCreate(PermissionRequiredMixin, CreateView):
 
     def has_permission(self):
         project = get_object_or_404(Project, id=self.kwargs.get('pk'))
-        return project.author == self.request.user and super().has_permission()
+        return  self.request.user in project.users.all() and super().has_permission()
 
 
     def get_success_url(self):
@@ -135,7 +135,6 @@ class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
     context_object_name = 'project'
     permission_required = 'webapp.change_project'
 
-
     def get_success_url(self):
         return reverse('project', kwargs={'pk': self.kwargs.get('pk')})
 
@@ -145,11 +144,6 @@ class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
     context_object_name = 'product'
     success_url = reverse_lazy('index')
     permission_required ='webapp.delete_project'
-
-    def has_permission(self):
-        project = get_object_or_404(Project, id=self.kwargs.get('pk'))
-        return project.author == self.request.user and super().has_permission()
-
 
     def get(self, request, *args, **kwargs):
         return super().delete(request, *args, **kwargs)
