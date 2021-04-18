@@ -49,7 +49,7 @@ class ProjectView(DetailView):
     model = Project
     template_name = 'project/project_view.html'
 
-class UsersAddView(LoginRequiredMixin, UpdateView):
+class ProjectUsersView(LoginRequiredMixin, UpdateView):
     form_class = UsersForm
     model = Project
     template_name = 'project/user-list.html'
@@ -67,24 +67,6 @@ class UsersAddView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('index')
 
-class UsersDeleteView(LoginRequiredMixin, UpdateView):
-    form_class = UsersForm
-    model = Project
-    template_name = 'project/user-list.html'
-    context_object_name = 'project'
-
-    def form_valid(self, form):
-        if user.groups.filter(name__in=['Project Manager', 'Team Lead']).exists():
-            project = get_object_or_404(Project, id=self.kwargs.get('pk'))
-            users = form.save()
-            print(users)
-            return super().form_valid(form)
-        else:
-            raise PermissionDenied
-
-
-    def get_success_url(self):
-        return reverse('index')
 
 
 class ProjectCreate(PermissionRequiredMixin, CreateView):
