@@ -5,7 +5,7 @@ from .forms import MyUserCreationForm
 from webapp.forms import SimpleSearchForm
 from django.views.generic import CreateView, DetailView, ListView
 from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.utils.http import urlencode
@@ -31,21 +31,19 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         kwargs['is_paginated'] = page.has_other_pages()
         return super().get_context_data(**kwargs)
 
-class UserListView(LoginRequiredMixin, ListView):
+class UserListView(PermissionRequiredMixin, ListView):
     template_name = 'users-list.html'
     context_object_name = 'users'
     model = User
     paginate_by = 5
     paginate_orphans = 1
+    permission_required = 'webapp.user_list_change'
 
     def get(self, request, *args, **kwargs):
-        user = self.request.user
-        if user.groups.filter(name__in=['Project Manager', 'Team Lead']).exists():
-            self.form = self.get_search_form()
-            self.search_value = self.get_search_value()
-            return super().get(request, *args, **kwargs)
-        else:
-            raise PermissionDenied
+        self.form = self.get_search_form()
+        self.search_value = self.get_search_value()
+        return super().get(request, *args, **kwargs)
+     
 
 
     def get_context_data(self, *, object_list=None, **kwargs):
