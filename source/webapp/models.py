@@ -27,6 +27,11 @@ class Project(models.Model):
         db_table = 'projects'
         verbose_name = 'Project'
         verbose_name_plural = 'Projects'
+        permissions = [
+            
+        ('user_list_change', 'Can change the list of users of the project')
+
+    ]
 
     def __str__(self):
         return self.project_name
