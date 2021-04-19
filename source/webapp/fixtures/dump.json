@@ -8,31 +8,10 @@
     "project_name": "Jujutsu",
     "project_description": "Watch Jujutsu Kaisen!!",
     "author": null,
-    "users": []
-  }
-},
-{
-  "model": "webapp.project",
-  "pk": 4,
-  "fields": {
-    "start_date": "2021-03-21",
-    "end_date": "2021-03-21",
-    "project_name": "Authorization",
-    "project_description": "Learn authorization",
-    "author": null,
-    "users": []
-  }
-},
-{
-  "model": "webapp.project",
-  "pk": 5,
-  "fields": {
-    "start_date": "2021-03-21",
-    "end_date": "2021-03-21",
-    "project_name": "Baby Shark",
-    "project_description": "I have no ideasaaaaaa",
-    "author": 1,
-    "users": []
+    "users": [
+      2,
+      3
+    ]
   }
 },
 {
@@ -44,7 +23,56 @@
     "project_name": "BLM",
     "project_description": "I can't breathe",
     "author": 2,
-    "users": []
+    "users": [
+      5
+    ]
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 13,
+  "fields": {
+    "start_date": "2021-03-21",
+    "end_date": "2021-03-21",
+    "project_name": "Naruto",
+    "project_description": "attribute name must be string, not 'ManyRelatedManager'",
+    "author": 1,
+    "users": [
+      1,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 14,
+  "fields": {
+    "start_date": "2021-03-21",
+    "end_date": "2021-03-21",
+    "project_name": "Lala",
+    "project_description": "from django.core.exceptions import PermissionDenied",
+    "author": 8,
+    "users": [
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 15,
+  "fields": {
+    "start_date": "2021-03-21",
+    "end_date": "2021-03-21",
+    "project_name": "Authorization",
+    "project_description": "len/ljwne'dlcn /lncvw",
+    "author": 8,
+    "users": [
+      8,
+      9,
+      10
+    ]
   }
 },
 {
@@ -115,136 +143,6 @@
     "created_at": "2021-03-11T11:12:34.039Z",
     "updated_at": "2021-03-11T11:12:34.039Z",
     "task_type": "Task"
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 1,
-  "fields": {
-    "password": "pbkdf2_sha256$216000$tWpmThjw1stV$RtAp4iwa6uaptWoDEaApq/CMIpU2Nt1nrkXFuxnrAt8=",
-    "last_login": "2021-04-15T10:49:31Z",
-    "is_superuser": true,
-    "username": "gosha",
-    "first_name": "",
-    "last_name": "",
-    "email": "begoshaaaa@gmail.com",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2021-03-11T09:01:53Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 2,
-  "fields": {
-    "password": "pbkdf2_sha256$216000$V6zjyLSCZLDJ$KGKhy2ZyMWQY+zZVGVOT+U2H39lfv8HwPKBGzvse0Zk=",
-    "last_login": "2021-04-15T10:37:07.183Z",
-    "is_superuser": false,
-    "username": "monpassan",
-    "first_name": "Begaiym",
-    "last_name": "Beksultanova",
-    "email": "begoshaaaaa@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2021-04-08T14:27:43Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 3,
-  "fields": {
-    "password": "pbkdf2_sha256$216000$8usAOkzZMDld$CISm9UZva5nYtte53mciSBLLVQeO48N0U70xo06PvWk=",
-    "last_login": "2021-04-11T14:07:09.116Z",
-    "is_superuser": false,
-    "username": "begosha",
-    "first_name": "Begosha",
-    "last_name": "Lalala",
-    "email": "daddy@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2021-04-11T14:07:09.027Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 4,
-  "fields": {
-    "password": "pbkdf2_sha256$216000$3XQPj6MJ0GcV$KD0DBs6sUWLgKhskkWnl4aARoxGv/PO15btMu/3LrRE=",
-    "last_login": "2021-04-11T15:09:06.096Z",
-    "is_superuser": false,
-    "username": "Sarah",
-    "first_name": "Amal",
-    "last_name": "Hussein",
-    "email": "sarah-is-my-boo@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2021-04-11T15:09:05.887Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 5,
-  "fields": {
-    "password": "pbkdf2_sha256$216000$8E9xUDse0DZ9$x4kNZW+oPnN2jFuGhfortefxd3XG3Jod/7O4H265U1E=",
-    "last_login": "2021-04-11T15:13:41.899Z",
-    "is_superuser": false,
-    "username": "dilovar",
-    "first_name": "Dilovar",
-    "last_name": "",
-    "email": "ginger@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2021-04-11T15:13:41.685Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 6,
-  "fields": {
-    "password": "pbkdf2_sha256$216000$JQowdnwZKb8n$Kamb+mR1cfO/aHj/kzj0h0v4g8xSeTfRjqkcU4/J/Tc=",
-    "last_login": "2021-04-12T07:53:02.421Z",
-    "is_superuser": false,
-    "username": "sarah",
-    "first_name": "Sarah",
-    "last_name": "",
-    "email": "dshnc@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2021-04-12T07:53:02.303Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 7,
-  "fields": {
-    "password": "pbkdf2_sha256$216000$ZNNBzahYHyVZ$J1JMi8Qm4d7frhq93808PxS3tgC0b33RXCsrFHgiPTM=",
-    "last_login": "2021-04-12T08:21:44.923Z",
-    "is_superuser": false,
-    "username": "mirai",
-    "first_name": "Nya",
-    "last_name": "",
-    "email": "nya@com.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2021-04-12T08:21:44.798Z",
-    "groups": [],
-    "user_permissions": []
   }
 }
 ]
