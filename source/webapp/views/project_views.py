@@ -49,20 +49,22 @@ class ProjectView(DetailView):
     model = Project
     template_name = 'project/project_view.html'
 
-class ProjectUsersView(LoginRequiredMixin, UpdateView):
+class ProjectUsersView(PermissionRequiredMixin, UpdateView):
     form_class = UsersForm
     model = Project
     template_name = 'project/user-list.html'
     context_object_name = 'project'
+    permission_required = 'webapp.user_list_change'
+
+    def has_permission(self):
+        project = get_object_or_404(Project, id=self.kwargs.get('pk'))
+        return  self.request.user in project.users.all() and super().has_permission()
 
     def form_valid(self, form):
-        user = self.request.user
-        if user.groups.filter(name__in=['Project Manager', 'Team Lead']).exists():
-            project = get_object_or_404(Project, id=self.kwargs.get('pk'))
-            users = form.save()
-            return super().form_valid(form)
-        else:
-            raise PermissionDenied
+        project = get_object_or_404(Project, id=self.kwargs.get('pk'))
+        users = form.save()
+        return super().form_valid(form)
+       
 
     def get_success_url(self):
         return reverse('index')
