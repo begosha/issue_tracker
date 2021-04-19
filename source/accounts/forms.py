@@ -32,3 +32,17 @@ class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username','first_name', 'last_name', 'email']
+
+class UserChangeForm(forms.ModelForm):
+
+    class Meta:
+        model = get_user_model()
+        fields = ['first_name', 'last_name', 'email']
+        labels = {'first_name': 'First Name', 'last_name': 'Last name', 'email': 'Email'}
+
+
+class ProfileChangeForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        exclude = ['user']
