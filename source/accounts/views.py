@@ -88,13 +88,15 @@ class RegisterView(CreateView):
             next_url = reverse('index')
         return next_url
 
-class UserChangeView(UpdateView):
+class UserChangeView(LoginRequiredMixin, UpdateView):
 
     model = get_user_model()
     form_class = UserChangeForm
     template_name = 'user_change.html'
     context_object_name = 'user_obj'
 
+    def get_object(self, queryset=None):
+        return self.request.user
 
     def get_context_data(self, **kwargs):
         if 'profile_form' not in kwargs:
