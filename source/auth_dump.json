@@ -19,6 +19,21 @@
         "delete_project",
         "webapp",
         "project"
+      ],
+      [
+        "add_task",
+        "webapp",
+        "task"
+      ],
+      [
+        "change_task",
+        "webapp",
+        "task"
+      ],
+      [
+        "delete_task",
+        "webapp",
+        "task"
       ]
     ]
   }
@@ -30,19 +45,19 @@
     "name": "Team Lead",
     "permissions": [
       [
-        "add_project",
+        "add_task",
         "webapp",
-        "project"
+        "task"
       ],
       [
-        "change_project",
+        "change_task",
         "webapp",
-        "project"
+        "task"
       ],
       [
-        "delete_project",
+        "delete_task",
         "webapp",
-        "project"
+        "task"
       ]
     ]
   }
@@ -52,7 +67,18 @@
   "pk": 3,
   "fields": {
     "name": "Developer",
-    "permissions": []
+    "permissions": [
+      [
+        "add_task",
+        "webapp",
+        "task"
+      ],
+      [
+        "change_task",
+        "webapp",
+        "task"
+      ]
+    ]
   }
 },
 {
@@ -60,7 +86,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$tWpmThjw1stV$RtAp4iwa6uaptWoDEaApq/CMIpU2Nt1nrkXFuxnrAt8=",
-    "last_login": "2021-04-15T11:40:54.645Z",
+    "last_login": "2021-04-18T15:03:18.568Z",
     "is_superuser": true,
     "username": "gosha",
     "first_name": "",
@@ -140,7 +166,7 @@
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$216000$8E9xUDse0DZ9$x4kNZW+oPnN2jFuGhfortefxd3XG3Jod/7O4H265U1E=",
-    "last_login": "2021-04-11T15:13:41.899Z",
+    "last_login": "2021-04-15T16:13:32.052Z",
     "is_superuser": false,
     "username": "dilovar",
     "first_name": "Dilovar",
@@ -194,7 +220,7 @@
   "pk": 8,
   "fields": {
     "password": "pbkdf2_sha256$216000$sh38PYeCmqOD$+FXZg90693rccsqKZfhOzjFAz7fBrwIiyBT5qYtlOd0=",
-    "last_login": "2021-04-15T12:44:08.201Z",
+    "last_login": "2021-04-15T16:13:57.202Z",
     "is_superuser": false,
     "username": "project_manager",
     "first_name": "",
@@ -232,7 +258,7 @@
   "pk": 9,
   "fields": {
     "password": "pbkdf2_sha256$216000$mbhbE7tFEhGu$LtHvvurM3/W/iHN6Y8xJMCBps5uDHXCac7G3caU9R6I=",
-    "last_login": null,
+    "last_login": "2021-04-15T13:39:19.534Z",
     "is_superuser": false,
     "username": "team_lead",
     "first_name": "",
@@ -254,7 +280,7 @@
   "pk": 10,
   "fields": {
     "password": "pbkdf2_sha256$216000$bNjyzCw4GVhB$dRqCFn92Ri/sa+7LDT69DIuNd6ogxZXG3JQAkvj/3wI=",
-    "last_login": null,
+    "last_login": "2021-04-15T13:07:24.812Z",
     "is_superuser": false,
     "username": "developer",
     "first_name": "",
