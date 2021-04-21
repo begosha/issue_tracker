@@ -1,17 +1,16 @@
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.shortcuts import render, get_object_or_404, redirect
-from .forms import MyUserCreationForm, UserChangeForm
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from .forms import MyUserCreationForm, UserChangeForm, ProfileChangeForm, PasswordChangeForm
 from webapp.forms import SimpleSearchForm
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.utils.http import urlencode
 
 
-
+        
 
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
@@ -37,15 +36,13 @@ class UserListView(PermissionRequiredMixin, ListView):
     model = User
     paginate_by = 5
     paginate_orphans = 1
-    permission_required = 'webapp.user_list_change'
+    permission_required = 'accounts.view_users_list'
 
     def get(self, request, *args, **kwargs):
         self.form = self.get_search_form()
         self.search_value = self.get_search_value()
         return super().get(request, *args, **kwargs)
      
-
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['form'] = self.form
@@ -134,6 +131,17 @@ class UserChangeView(LoginRequiredMixin, UpdateView):
 
 
     def get_success_url(self):
-        return reverse('accounts:detail', kwargs={'pk': self.object.pk})
+        return reverse('detail', kwargs={'pk': self.object.pk})
+
+class UserPasswordChangeView(UpdateView):
+    model = get_user_model()
+    template_name = 'user_password_change.html'
+    form_class = PasswordChangeForm
+    context_object_name = 'user_obj'
+
+    def get_success_url(self):
+        return reverse('login')
+
+
 
 
