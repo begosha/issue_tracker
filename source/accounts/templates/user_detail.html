@@ -1,13 +1,5 @@
 {% extends 'base.html' %}
 {% block title %}{{ user_obj.get_full_name|default:user_obj.username }}{% endblock %}
-{% block menu_links %}
-
-    <li><a href="#">Edit</a></li>
-
-    <li><a href="#">Change Password</a></li>
-
-{% endblock %}
-
 
 {% block content %}
 <div class="task-view">
@@ -21,6 +13,8 @@
     <p>Summary: {{ user_obj.profile.summary }}</p>
     <p>Github Profile: <a href="{{ user_obj.profile.github }}">{{ user_obj.profile.github }}</a></p>
     <p>Почта: {{ user_obj.email }}</p>
+    <a class="btn btn-outline-info" href="{% url 'change' user_obj.pk %}">Edit</a>
+    <a class="btn btn-outline-info" href="{% url 'password_change' user_obj.pk %}">Change Password</a>
 </div>
 <h2 class="text-center clear" style="font-weight: 700; text-transform: uppercase;">Projects of user:</h2>
 <br>
