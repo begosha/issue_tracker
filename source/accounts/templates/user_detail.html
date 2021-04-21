@@ -13,8 +13,10 @@
     <p>Summary: {{ user_obj.profile.summary }}</p>
     <p>Github Profile: <a href="{{ user_obj.profile.github }}">{{ user_obj.profile.github }}</a></p>
     <p>Почта: {{ user_obj.email }}</p>
+    {% if request.user == user_obj %}
     <a class="btn btn-outline-info" href="{% url 'change' user_obj.pk %}">Edit</a>
     <a class="btn btn-outline-info" href="{% url 'password_change' user_obj.pk %}">Change Password</a>
+    {% endif %}
 </div>
 <h2 class="text-center clear" style="font-weight: 700; text-transform: uppercase;">Projects of user:</h2>
 <br>
