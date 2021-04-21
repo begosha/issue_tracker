@@ -7,7 +7,7 @@
             <p>Description: {{ project.project_description}}</p>
             <p> Start Date: {{ project.start_date }}</p>
             <p> End Date: {{ project.end_date }}</p>
-            <p>Users: {% for user in project.users.all %}{{ user.username }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p>Users: {% for user in project.users.all %}<a href="{% url 'detail' user.pk %}">{{ user.username }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
             <div class="project-tasks">
                 <h2>Tasks:</h2>
                 {% for task in project.tasks.all %}
