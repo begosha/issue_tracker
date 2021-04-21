@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login, logout, get_user_model, update_session_auth_hash
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .forms import MyUserCreationForm, UserChangeForm, ProfileChangeForm, PasswordChangeForm
 from webapp.forms import SimpleSearchForm
@@ -139,8 +139,13 @@ class UserPasswordChangeView(UpdateView):
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
 
+    def form_valid(self, form):
+        response = super(UserPasswordChangeView, self).form_valid(form)
+        update_session_auth_hash(self.request, user)
+        return response
+
     def get_success_url(self):
-        return reverse('login')
+        return reverse('index')
 
 
 

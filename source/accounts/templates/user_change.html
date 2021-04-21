@@ -16,10 +16,10 @@
     {% if not fields_only %}
         <input type="submit" value="Submit">
     {% endif %}
-    <a class="btn btn-outline-info" href="{% url 'password_change' user_obj.pk %}">Change Password</a>
+</form>
 
+    <a class="btn btn-outline-info" href="{% url 'password_change' user_obj.pk %}">Change Password</a>
     <br>
-    </form>
 </div>
 
 {% endblock %}
