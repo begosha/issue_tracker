@@ -63,6 +63,8 @@ class ProjectUsersView(PermissionRequiredMixin, UpdateView):
     def form_valid(self, form):
         project = get_object_or_404(Project, id=self.kwargs.get('pk'))
         users = form.save()
+        print(form)
+        print(project.users.all())
         return super().form_valid(form)
        
 
