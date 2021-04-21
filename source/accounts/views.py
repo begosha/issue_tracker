@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.utils.http import urlencode
+from accounts.models import Profile
 
 
         

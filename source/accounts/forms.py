@@ -22,8 +22,9 @@ class MyUserCreationForm(UserCreationForm):
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
+            Profile.objects.create(user=user)
         return user
-
+  
     def clean_email(self):
           data = self.cleaned_data['email']
           if User.objects.filter(email=data).count() > 0:
