@@ -140,6 +140,9 @@ class UserPasswordChangeView(UpdateView):
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
 
+    def get_object(self, queryset=None):
+        return self.request.user
+
     def form_valid(self, form):
         response = super(UserPasswordChangeView, self).form_valid(form)
         update_session_auth_hash(self.request, user)
